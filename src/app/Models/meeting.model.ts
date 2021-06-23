@@ -18,6 +18,6 @@ export class Points {
 }
 
 export class Point {
-    constructor(public id: number, public participantName: string, public pointText: string, public actionItem: string) {
+    constructor(public id: number, public participantName: string, public participantId: number, public pointText: string, public actionItem: string) {
     }
 }

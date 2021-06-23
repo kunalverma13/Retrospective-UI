@@ -24,6 +24,7 @@ export class PointEntryComponent implements OnInit {
     var point: Point = {
       id: 0,
       participantName: form.value.checkAnonymous ? "Anonymous" : this.meetingService.participantName, 
+      participantId: form.value.checkAnonymous ? 0 : this.meetingService.participantId, 
       pointText: form.value.txtPoint,
       actionItem: ""
     };

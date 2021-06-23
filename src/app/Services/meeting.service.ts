@@ -13,6 +13,7 @@ export class MeetingService {
   apiURL = environment.apiURL;
 
   participantName: string = "";
+  participantId: number = 0;
   listOfpointLists: Points[] = [];
   meetingId: string = "";
   pointListsNames: string[] = ["Start doing", "Continue doing", "Stop doing"];
@@ -33,6 +34,7 @@ export class MeetingService {
       catchError(this.httpErrorHandler.handleError),
       map((resposne)=>{
         this.participantName = participantName;
+        this.participantId = +resposne;
         return String(resposne);
       })
     );
@@ -42,9 +44,9 @@ export class MeetingService {
     var listObject = this.listOfpointLists.find(x=>x.listName === listName);
     if(listObject === undefined) {
       this.listOfpointLists.push(
-        {id: 0, listName: listName, points: [{id: 0, participantName: point.participantName, pointText: point.pointText, actionItem: ""}]})
+        {id: 0, listName: listName, points: [{id: 0, participantName: point.participantName, participantId: point.participantId, pointText: point.pointText, actionItem: ""}]})
     } else {
-      listObject.points.push({id: 0, participantName: point.participantName, pointText: point.pointText, actionItem: ""});
+      listObject.points.push({id: 0, participantName: point.participantName, participantId: point.participantId, pointText: point.pointText, actionItem: ""});
     }
   }
 

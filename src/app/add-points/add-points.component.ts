@@ -10,6 +10,7 @@ import { MeetingService } from '../Services/meeting.service';
 export class AddPointsComponent implements OnInit, OnDestroy {
   pointLists: string[] = [];
   isError: boolean = false;
+  isLoading: boolean = false;
   uploadPointsToDatabaseSubscription: Subscription = new Subscription();
 
   constructor(private meetingService: MeetingService) { }
@@ -24,8 +25,16 @@ export class AddPointsComponent implements OnInit, OnDestroy {
 
   submitPoints(): void {
     this.isError = false;
-    this.uploadPointsToDatabaseSubscription = this.meetingService.uploadPointsToDatabase().subscribe(response => {
-      this.isError = !response;
+    this.isLoading = true;
+    this.uploadPointsToDatabaseSubscription = this.meetingService.uploadPointsToDatabase()
+    .subscribe(
+      response => {
+        this.isError = !response;
+        this.isLoading = false;
+    },
+      error => {
+        this.isError = true;
+        this.isLoading = false;
     });
   }
 

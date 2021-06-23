@@ -1,4 +1,9 @@
 <div class="container">
+    <div class="row" *ngIf="isError">
+        <div class="col">
+            <p class="error-text">There was an error, please try again</p>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <p class="h4 text-center">Add your points</p>
