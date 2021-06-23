@@ -8,6 +8,7 @@ import { CoordinatorViewComponent } from './coordinator-view/coordinator-view.co
 import { NgbdModalComponent } from './ngbd-modal-component/ngbd-modal.component';
 
 const routes: Routes = [
+  {path: "", redirectTo: "meetingName", pathMatch: "full"},
   {path: "meetingName", component: MeetingNameComponent},
   {path: "participantName/:id", component: ParticipantNameComponent},
   {path: "coordinator/:id", component: CoordinatorViewComponent},
