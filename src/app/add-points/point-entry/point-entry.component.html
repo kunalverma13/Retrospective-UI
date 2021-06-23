@@ -1,0 +1,50 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="row">
+            <div class="col">
+                <p class="h5 text-center">{{title}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <textarea 
+                    ngModel 
+                    name="txtPoint" 
+                    id="txtPoint" 
+                    required 
+                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    class="form-control form-text"
+                    [disabled]="isLoading">
+                </textarea>
+                <p class="form-text" *ngIf="f.invalid && f.submitted">Enter some text.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input 
+                    type="checkbox"
+                    ngModel 
+                    name="checkAnonymous" 
+                    id="checkAnonymous" 
+                    class="form-check-input"
+                    [disabled]="isLoading">
+                <label class="form-check-label">Anonymous</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <input type="submit" value="Add" class="btn btn-primary" [disabled]="isLoading">
+            </div>
+        </div>
+    </form>
+    <div class="row" *ngIf="isError">
+        <div class="col">
+            <p class="h5 text-center">An error has occoured.</p>
+        </div>
+    </div>
+    <div class="row" *ngFor="let point of points">
+        <div class="col">
+            <p>{{point.pointText}} - {{point.participantName}}</p>
+        </div>
+    </div>
+</div>

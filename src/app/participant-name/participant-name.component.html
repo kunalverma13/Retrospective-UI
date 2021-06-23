@@ -1,0 +1,57 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!isSaved && !isError">
+        <div class="row">
+            <div class="col">
+                <p class="h5 text-center">Enter your name</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-form-label">
+                <label for="lblParticipantName" class="form-label">Participant name:</label>
+            </div>
+            <div class="col">
+                <input 
+                    type="text" 
+                    ngModel 
+                    name="participantName" 
+                    id="participantName" 
+                    required 
+                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    class="form-control form-text"
+                    [disabled]="isLoading">
+            </div>
+            <div class="col">
+                <p class="form-text" *ngIf="f.invalid && f.submitted">Participant name is required.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-form-label">
+                <label for="lblParticipantEmail" class="form-label">Participant email:</label>
+            </div>
+            <div class="col">
+                <input 
+                    type="email" 
+                    ngModel 
+                    name="participantEmail" 
+                    id="participantEmail" 
+                    required 
+                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    class="form-control form-text"
+                    [disabled]="isLoading">
+            </div>
+            <div class="col">
+                <p class="form-text" *ngIf="f.invalid && f.submitted">Participant email is required.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <input type="submit" value="Submit" class="btn btn-primary" [disabled]="isLoading">
+            </div>
+        </div>
+    </form>
+    <div class="row" *ngIf="isError">
+        <div class="col">
+            <p class="h5 text-center">An error has occoured.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!isSaved && !isError">
+        <div class="row">
+            <div class="col">
+                <p class="h5 text-center">Enter meeting name</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-form-label">
+                <label for="txtMeetingName" class="form-label">Meeting name:</label>
+            </div>
+            <div class="col">
+                <input 
+                    type="text" 
+                    ngModel 
+                    name="meetingName" 
+                    id="meetingName" 
+                    required 
+                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    class="form-control form-text"
+                    [disabled]="isLoading">
+            </div>
+            <div class="col">
+                <p class="form-text" *ngIf="f.invalid && f.submitted">Meeting name is required.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <input type="submit" value="Submit" class="btn btn-primary" [disabled]="isLoading">
+            </div>
+        </div>
+    </form>
+    <div class="row" *ngIf="isSaved">
+        <div class="col">
+            <p class="h5 text-center">Provide the following links to participants: <a routerLink="../participantName/{{meetingId}}">Participant Link</a></p>
+            <p class="h5 text-center">This link is for the coordinator: <a routerLink="../coordinator/{{meetingId}}">Coordinator Link</a></p>
+        </div>
+    </div>
+    <div class="row" *ngIf="isError">
+        <div class="col">
+            <p class="h5 text-center">An error has occoured.</p>
+        </div>
+    </div>
+</div>

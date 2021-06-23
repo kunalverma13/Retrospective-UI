@@ -1,0 +1,31 @@
+<div class="modal-open overflow-auto">
+    <div class="modal-header"><p class="h5">Retro point</p></div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="h6">
+                        {{point.pointText}}
+                        <br/> 
+                        <span class="font-italic float-right">- {{point.participantName}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <textarea 
+                    class="form-control" 
+                    placeholder="Action item" 
+                    name="txtActionItem" 
+                    id="txtActionItem" 
+                    #txtActionItem>{{point.actionItem}}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary" (click)="saveActionItem()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

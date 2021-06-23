@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-primary" [disabled]="isLoading" (click)="getMeetingData()">Get meeting data</button>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="!isLoading && !isError && isDataLoaded">
+    <div class="row">
+        <div class="col">
+            <app-participant-list [participantList]="meetingData.participants"></app-participant-list>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p class="h6 text-center">Retro points</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-truncate" *ngFor="let pointsList of meetingData.pointsLists">
+            <app-point-list [pointsList]="pointsList"></app-point-list>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button (click)="sendEmail()">Send email</button>
+        </div>
+    </div>
+</div>
