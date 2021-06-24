@@ -16,7 +16,7 @@
                     class="form-control form-text"
                     [disabled]="isLoading">
                 </textarea>
-                <p class="form-text" *ngIf="f.invalid && f.submitted">Enter some text.</p>
+                <p class="form-text alert alert-danger" *ngIf="f.controls.txtPoint.invalid && f.controls.txtPoint.dirty || f.controls.txtPoint.touched">Enter some text.</p>
             </div>
         </div>
         <div class="row">
@@ -26,7 +26,7 @@
                     ngModel 
                     name="checkAnonymous" 
                     id="checkAnonymous" 
-                    class="form-check-input"
+                    class="form-check-inline"
                     [disabled]="isLoading">
                 <label class="form-check-label">Anonymous</label>
             </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="row" *ngFor="let point of points">
         <div class="col">
-            <p>{{point.pointText}} - {{point.participantName}}</p>
+            <p class="word-wrap">{{point.pointText}} - {{point.participantName}}</p>
         </div>
     </div>
 </div>
