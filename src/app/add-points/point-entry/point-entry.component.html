@@ -16,7 +16,7 @@
                     class="form-control form-text"
                     [disabled]="isLoading">
                 </textarea>
-                <p class="form-text alert alert-danger" *ngIf="f.controls.txtPoint.invalid && f.controls.txtPoint.dirty || f.controls.txtPoint.touched">Enter some text.</p>
+                <p class="form-text text-danger" *ngIf="f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)">Enter some text.</p>
             </div>
         </div>
         <div class="row">

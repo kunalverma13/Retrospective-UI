@@ -21,16 +21,20 @@ export class PointEntryComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    var point: Point = {
-      id: 0,
-      participantName: form.value.checkAnonymous ? "Anonymous" : this.meetingService.participantName, 
-      participantId: form.value.checkAnonymous ? 0 : this.meetingService.participantId, 
-      pointText: form.value.txtPoint,
-      actionItem: ""
-    };
-    this.meetingService.addPointToPointsList(point, this.title);
-    this.points = this.meetingService.getPointsList(this.title);
-    form.reset();
+    if(form.valid) {
+      var point: Point = {
+        id: 0,
+        participantName: form.value.checkAnonymous ? "Anonymous" : this.meetingService.participantName, 
+        participantId: form.value.checkAnonymous ? 0 : this.meetingService.participantId, 
+        pointText: form.value.txtPoint,
+        actionItem: ""
+      };
+      this.meetingService.addPointToPointsList(point, this.title);
+      this.points = this.meetingService.getPointsList(this.title);
+      form.reset();
+    } else {
+      form.controls.txtPoint.markAllAsTouched();
+    }
   }
 
 }
