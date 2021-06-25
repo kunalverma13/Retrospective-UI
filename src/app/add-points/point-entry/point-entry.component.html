@@ -16,7 +16,7 @@
                     class="form-control form-text"
                     [disabled]="isLoading">
                 </textarea>
-                <p class="form-text text-danger" *ngIf="f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)">Enter some text.</p>
+                <p class="form-text text-danger" *ngIf="f.controls.txtPoint && f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)">Enter some text.</p>
             </div>
         </div>
         <div class="row">
@@ -42,9 +42,9 @@
             <p class="h5 text-center">An error has occoured.</p>
         </div>
     </div>
-    <div class="row" *ngFor="let point of points">
+    <div class="row" *ngFor="let point of getPointsList()">
         <div class="col">
-            <p class="word-wrap">{{point.pointText}} - {{point.participantName}}</p>
+            <p class="word-wrap local">{{point.pointText}} - {{point.participantName}}</p>
         </div>
     </div>
 </div>

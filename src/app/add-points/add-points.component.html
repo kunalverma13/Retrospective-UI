@@ -12,11 +12,19 @@
     <div class="row">
         <div class="col" *ngFor="let listType of pointLists">
             <app-point-entry [title]="listType"></app-point-entry>
+            <hr/>
+            <div class="container">
+                <div class="row" *ngFor="let point of getUploadedPointsByListName(listType)">
+                    <div class="col">
+                        <p class="word-wrap uploaded">{{point.pointText}} - {{point.participantName}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <button (click)="submitPoints()" class="btn btn-success">Complete</button>
+            <button (click)="submitPoints()" class="btn btn-success">Post to board</button>
         </div>
     </div>
 </div>

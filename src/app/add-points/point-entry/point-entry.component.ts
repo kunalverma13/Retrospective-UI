@@ -33,8 +33,12 @@ export class PointEntryComponent implements OnInit {
       this.points = this.meetingService.getPointsList(this.title);
       form.reset();
     } else {
-      form.controls.txtPoint.markAllAsTouched();
+      form.controls.txtPoint.markAsTouched();
     }
+  }
+
+  getPointsList() {
+    return this.meetingService.getPointsList(this.title);
   }
 
 }
