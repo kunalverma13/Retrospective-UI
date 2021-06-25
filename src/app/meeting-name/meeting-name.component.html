@@ -32,8 +32,8 @@
     </form>
     <div class="row" *ngIf="isSaved">
         <div class="col">
-            <p class="h5 text-center">Provide the following links to participants: <a routerLink="../participantName/{{meetingId}}">Participant Link</a></p>
-            <p class="h5 text-center">This link is for the coordinator: <a routerLink="../coordinator/{{meetingId}}">Coordinator Link</a></p>
+            <p class="h5 text-center">Provide the following links to participants: <a routerLink="../participantName/{{meetingId}}" target="_blank">Participant Link</a></p>
+            <p class="h5 text-center">This link is for the coordinator: <a routerLink="../coordinator/{{meetingId}}" target="_blank">Coordinator Link</a></p>
         </div>
     </div>
     <div class="row" *ngIf="isError">

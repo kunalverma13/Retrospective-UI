@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Point } from '../Models/meeting.model';
 import { MeetingService } from '../Services/meeting.service';
@@ -12,6 +12,7 @@ export class ActionItemComponent implements OnInit, OnDestroy {
   
   @Input('point') point!: Point;
   @Input('listId') listId: number = 0;
+  @Output('close') close: EventEmitter<void> = new EventEmitter(); 
 
   @ViewChild('txtActionItem') txtActionItem!: ElementRef;
 
@@ -24,13 +25,13 @@ export class ActionItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //this.txtActionItem.nativeElement.value = this.point.actionItem;
   }
 
   saveActionItem(): void {
     this.saveActionItemSubscription = this.meetingService.saveActionItem(this.listId, this.point.id, this.txtActionItem.nativeElement.value)
     .subscribe(response=>{
       this.point.actionItem = this.txtActionItem.nativeElement.value;
+      this.close.emit();
     });
   }
 

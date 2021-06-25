@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { MeetingNameComponent } from '../meeting-name/meeting-name.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-ngbd-modal',
@@ -11,13 +10,19 @@ export class NgbdModalComponent implements OnInit {
 
   @Input("linkText") linkText : string = "click";
 
+  modelRef!: NgbModalRef;;
+
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
 
   open(content: any) {
-    this.modalService.open(content);
+    this.modelRef = this.modalService.open(content);
+  }
+
+  close(): void {
+    this.modelRef.close();
   }
 
 }
