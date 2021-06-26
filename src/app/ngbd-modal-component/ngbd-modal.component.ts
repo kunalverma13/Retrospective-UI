@@ -17,7 +17,7 @@ export class NgbdModalComponent implements OnInit, OnDestroy {
   constructor(private modalService: NgbModal, private meetingService: MeetingService) { }
   
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.actionItemSavedSubjectSubscription.unsubscribe();
   }
 
   ngOnInit(): void {

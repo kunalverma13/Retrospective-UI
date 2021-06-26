@@ -88,8 +88,17 @@ export class MeetingService {
     );
   }
 
-  sendEmail(meetingId: string): Observable<Meeting> {
+  sendEmail(meetingId: string): Observable<boolean> {
     return this.http.get(`${this.apiURL}api/Email?Id=${meetingId}`).pipe(
+      catchError(this.httpErrorHandler.handleError),
+      map((resposne: any)=>{
+        return resposne;
+      })
+    );
+  }
+
+  toggleAllowAddPoints(meetingId: string): Observable<string> {
+    return this.http.get(`${this.apiURL}api/Meeting/ToggleAddPointsFlag?Id=${meetingId}`).pipe(
       catchError(this.httpErrorHandler.handleError),
       map((resposne: any)=>{
         return resposne;

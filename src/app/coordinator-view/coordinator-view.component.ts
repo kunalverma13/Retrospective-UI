@@ -50,4 +50,13 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
     this.meetingService.sendEmail(this.meetingService.meetingId).subscribe();
   }
 
+  toggleAllowAddPoints(shouldGetData: boolean): void {
+    this.meetingService.toggleAllowAddPoints(this.meetingService.meetingId)
+    .subscribe(response=> {
+      if(shouldGetData) {
+        this.getMeetingData()
+      }
+    });
+  }
+
 }

@@ -1,0 +1,7 @@
+<div *ngIf="hasTimerEnded">
+    <label>Minutes:&nbsp;</label> <input [(ngModel)]="minutes" type="number" max="10" min="0"> &nbsp;
+    <label>Seconds:&nbsp;</label> <input [(ngModel)]="seconds" type="number" max="60" min="0">
+</div>
+<div *ngIf="!hasTimerEnded">{{counter | formatTime}}</div>
+<button class="btn btn-primary" (click)="start()" *ngIf="hasTimerEnded">Start</button>
+<button class="btn btn-primary" (click)="stop()" *ngIf="!hasTimerEnded">Stop</button>

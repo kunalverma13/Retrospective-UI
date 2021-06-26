@@ -15,6 +15,8 @@ import { ParticipantListComponent } from './participant-list/participant-list.co
 import { PointListComponent } from './point-list/point-list.component';
 import { NgbdModalComponent } from './ngbd-modal-component/ngbd-modal.component';
 import { ActionItemComponent } from './action-item/action-item.component';
+import { TimerComponent } from './timer/timer.component';
+import { FormatTimePipe } from './timer/format-time.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ActionItemComponent } from './action-item/action-item.component';
     ParticipantListComponent,
     PointListComponent,
     NgbdModalComponent,
-    ActionItemComponent
+    ActionItemComponent,
+    TimerComponent,
+    FormatTimePipe
   ],
   imports: [
     BrowserModule,
