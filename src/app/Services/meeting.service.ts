@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Meeting, Point, Points } from '../Models/meeting.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { httpErrorHandlerService } from './http-error-handler.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,6 +17,7 @@ export class MeetingService {
   listOfpointLists: Points[] = [];
   meetingId: string = "";
   pointListsNames: string[] = ["Start doing", "Continue doing", "Stop doing"];
+  actionItemSavedSubject: Subject<void> = new Subject();
 
   constructor(private http: HttpClient, private httpErrorHandler: httpErrorHandlerService) { }
 
@@ -85,6 +86,7 @@ export class MeetingService {
     return this.http.post(`${this.apiURL}api/Meeting/SaveActionItem`, {meetingId: this.meetingId, listId: listId, pointId: pointId, actionItem: actionItem}).pipe(
       catchError(this.httpErrorHandler.handleError),
       map((resposne)=>{
+        this.actionItemSavedSubject.next();
         return String(resposne);
       })
     );
