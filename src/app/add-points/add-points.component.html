@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row" *ngIf="isError">
         <div class="col">
-            <p class="error-text">There was an error, please try again</p>
+            <p class="error-text">{{errorMessage}}</p>
         </div>
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <button (click)="submitPoints()" class="btn btn-success">Post to board</button>
+            <button (click)="submitPoints()" class="btn btn-success" [disabled]="shouldDisablePost()">Post to board</button>
         </div>
     </div>
 </div>

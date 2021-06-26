@@ -13,6 +13,7 @@ export class AddPointsComponent implements OnInit, OnDestroy {
   pointLists: string[] = [];
   uploadedPoints: Points[] = []
   isError: boolean = false;
+  errorMessage: string = "There was an error, please try again";
   isLoading: boolean = false;
   uploadPointsToDatabaseSubscription: Subscription = new Subscription();
 
@@ -32,10 +33,12 @@ export class AddPointsComponent implements OnInit, OnDestroy {
     this.uploadPointsToDatabaseSubscription = this.meetingService.uploadPointsToDatabase()
     .subscribe(
       response => {
-        this.isError = !response;
+        this.isError = !response.saved;
         if(!this.isError) {
           this.addPointsToUploadedList();
           this.meetingService.listOfpointLists = [];
+        } else {
+          this.errorMessage = response.error;
         }
         this.isLoading = false;
     },
@@ -50,6 +53,8 @@ export class AddPointsComponent implements OnInit, OnDestroy {
     var listObject = this.uploadedPoints.find(x=>x.listName === listName);
     return listObject === undefined ? response : listObject.points;
   }
+
+  shouldDisablePost = () => this.meetingService.listOfpointLists.length <= 0;
 
   private addPointsToUploadedList() {
     if(this.uploadedPoints.length == 0) {

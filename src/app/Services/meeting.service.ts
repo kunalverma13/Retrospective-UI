@@ -57,20 +57,16 @@ export class MeetingService {
     return listObject === undefined ? response : listObject.points;
   }
 
-  uploadPointsToDatabase(): Observable<boolean> {
-    if(this.listOfpointLists.length > 0){
-      return this.http.post(
-        `${this.apiURL}api/Meeting/SavePointsLists`, 
-        {"meetingId": this.meetingId, "listOfPointLists":  this.listOfpointLists})
-        .pipe(
-          catchError(this.httpErrorHandler.handleError),
-          map((resposne)=>{
-          return (resposne == true);
-        })
-      );
-    } else {
-      return of(false);
-    }
+  uploadPointsToDatabase(): Observable<any> {
+    return this.http.post(
+      `${this.apiURL}api/Meeting/SavePointsLists`, 
+      {"meetingId": this.meetingId, "listOfPointLists":  this.listOfpointLists})
+      .pipe(
+        catchError(this.httpErrorHandler.handleError),
+        map((resposne: any)=>{
+        return (resposne);
+      })
+    );
   }
 
   getMeetingData(meetingId: string): Observable<Meeting> {
