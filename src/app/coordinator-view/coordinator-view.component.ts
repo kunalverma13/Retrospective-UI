@@ -25,6 +25,7 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.meetingService.meetingId = this.route.snapshot.params["id"];
+    this.getMeetingData();
     this.routeSubscription = this.route.params.subscribe(params=>{
       this.meetingService.meetingId = params["id"];
     });

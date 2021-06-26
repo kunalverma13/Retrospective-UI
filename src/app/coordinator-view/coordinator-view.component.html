@@ -1,9 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="col text-center">
-            <p>Start timer to allow adding points</p>
+            <label class="h4">Welcome to {{meetingData.meetingName}}!</label>
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>Start the timer to allow adding points:</p>
+        </div>
+        <div class="col">
             <app-timer (countDownEnded)="toggleAllowAddPoints(true)" (countDownStarted)="toggleAllowAddPoints(false)"></app-timer>
-            <!-- <button class="btn btn-primary" [disabled]="isLoading" (click)="getMeetingData()">Get meeting data</button> -->
         </div>
     </div>
 </div>
