@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { MeetingService } from '../Services/meeting.service';
 
 @Component({
@@ -16,7 +17,10 @@ export class ParticipantNameComponent implements OnInit {
   meetingId: string = "";
   participantId: string = "";
 
-  constructor(private meetingService: MeetingService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private meetingService: MeetingService, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private spinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.meetingService.meetingId = this.route.snapshot.params["id"];
@@ -28,6 +32,7 @@ export class ParticipantNameComponent implements OnInit {
   onSubmit(form: NgForm){
     if(form.valid) {
       this.isLoading = true;
+      this.spinnerService.show();
       this.meetingService.addParticipantToMeeting(form.value.participantName, form.value.participantEmail)
       .subscribe(
         (response: string) => {
@@ -45,6 +50,7 @@ export class ParticipantNameComponent implements OnInit {
       },
       ()=>{
         this.isLoading = false;
+        this.spinnerService.hide();
       });
     } else {
       form.controls.participantName.markAsTouched();
