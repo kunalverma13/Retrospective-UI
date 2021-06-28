@@ -1,12 +1,13 @@
 <div class="container">
+    <div class="row">
+        <div class="col">
+            <p class="h4 text-center">Welcome to your meeting!</p>
+            <hr/>
+        </div>
+    </div>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!isSaved && !isError">
         <div class="row">
-            <div class="col">
-                <p class="h5 text-center">Enter meeting name</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-form-label">
+            <div class="col-2 col-form-label">
                 <label for="txtMeetingName" class="form-label">Meeting name:</label>
             </div>
             <div class="col">
@@ -18,14 +19,15 @@
                     required 
                     [ngClass]="{redBorder: f.invalid && f.submitted}" 
                     class="form-control form-text"
-                    [disabled]="isLoading">
+                    [disabled]="isLoading"
+                    placeholder="Enter meeting name.">
             </div>
-            <div class="col">
-                <p class="form-text" *ngIf="f.invalid && f.submitted">Meeting name is required.</p>
+            <div class="col text-left">
+                <p class="form-text text-danger" *ngIf="f.invalid && f.submitted">Please enter a meeting name.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-left">
                 <input type="submit" value="Submit" class="btn btn-primary" [disabled]="isLoading">
             </div>
         </div>
@@ -41,4 +43,7 @@
             <p class="h5 text-center">An error has occoured.</p>
         </div>
     </div>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+        <p style="color: white">Please Wait. </p>  
+    </ngx-spinner>  
 </div>
