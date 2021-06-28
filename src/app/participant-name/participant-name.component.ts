@@ -26,7 +26,7 @@ export class ParticipantNameComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    if(form.valid){
+    if(form.valid) {
       this.isLoading = true;
       this.meetingService.addParticipantToMeeting(form.value.participantName, form.value.participantEmail)
       .subscribe(
@@ -36,6 +36,7 @@ export class ParticipantNameComponent implements OnInit {
         } else {
           this.participantId = response;
           this.isSaved = true;
+          form.reset();
           this.router.navigate(["addPoints"]);
         }
       }, 
@@ -45,6 +46,9 @@ export class ParticipantNameComponent implements OnInit {
       ()=>{
         this.isLoading = false;
       });
+    } else {
+      form.controls.participantName.markAsTouched();
+      form.controls.participantEmail.markAsTouched();
     }
   }
 

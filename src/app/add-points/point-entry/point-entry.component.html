@@ -14,7 +14,8 @@
                     required 
                     [ngClass]="{redBorder: f.invalid && f.submitted}" 
                     class="form-control form-text"
-                    [disabled]="isLoading">
+                    [disabled]="isLoading"
+                    placeholder="Enter retro point.">
                 </textarea>
                 <p class="form-text text-danger" *ngIf="f.controls.txtPoint && f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)">Enter some text.</p>
             </div>

@@ -18,10 +18,13 @@
                     required 
                     [ngClass]="{redBorder: f.invalid && f.submitted}" 
                     class="form-control form-text"
-                    [disabled]="isLoading">
+                    [disabled]="isLoading"
+                    placeholder="Enter participant name.">
             </div>
             <div class="col">
-                <p class="form-text" *ngIf="f.invalid && f.submitted">Participant name is required.</p>
+                <div class="text-danger" *ngIf="f.controls.participantName && f.controls.participantName.invalid && (f.controls.participantName.dirty || f.controls.participantName.touched)">
+                    <p class="form-text" *ngIf="f.controls.participantName.errors?.required">Participant name is required.</p>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -35,12 +38,17 @@
                     name="participantEmail" 
                     id="participantEmail" 
                     required 
+                    email
                     [ngClass]="{redBorder: f.invalid && f.submitted}" 
                     class="form-control form-text"
-                    [disabled]="isLoading">
+                    [disabled]="isLoading"
+                    placeholder="Enter participant email.">
             </div>
             <div class="col">
-                <p class="form-text" *ngIf="f.invalid && f.submitted">Participant email is required.</p>
+                <div class="text-danger" *ngIf="f.controls.participantEmail && f.controls.participantEmail.invalid && (f.controls.participantEmail.dirty || f.controls.participantEmail.touched)">
+                    <p class="form-text" *ngIf="f.controls.participantEmail.errors?.required">Participant email is required.</p>
+                    <p class="form-text" *ngIf="f.controls.participantEmail.errors?.email">Participant email is invalid.</p>
+                </div>
             </div>
         </div>
         <div class="row">
