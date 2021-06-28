@@ -1,5 +1,6 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { Point, Points } from '../Models/meeting.model';
 import { MeetingService } from '../Services/meeting.service';
@@ -17,7 +18,7 @@ export class AddPointsComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   uploadPointsToDatabaseSubscription: Subscription = new Subscription();
 
-  constructor(private meetingService: MeetingService) { }
+  constructor(private meetingService: MeetingService, private spinnerService: NgxSpinnerService) { }
   
   ngOnDestroy(): void {
     this.uploadPointsToDatabaseSubscription.unsubscribe();
@@ -30,6 +31,7 @@ export class AddPointsComponent implements OnInit, OnDestroy {
   submitPoints(): void {
     this.isError = false;
     this.isLoading = true;
+    this.spinnerService.show();
     this.uploadPointsToDatabaseSubscription = this.meetingService.uploadPointsToDatabase()
     .subscribe(
       response => {
@@ -45,12 +47,15 @@ export class AddPointsComponent implements OnInit, OnDestroy {
       error => {
         this.isError = true;
         this.isLoading = false;
+    },
+      () => {
+        this.spinnerService.hide();
     });
   }
 
   getUploadedPointsByListName(listName: string): Point[] {
     var response: Point[] = [];
-    var listObject = this.uploadedPoints.find(x=>x.listName === listName);
+    var listObject = this.uploadedPoints.find(x => x.listName === listName);
     return listObject === undefined ? response : listObject.points;
   }
 
