@@ -12,7 +12,7 @@
                     name="txtPoint" 
                     id="txtPoint" 
                     required 
-                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    [ngClass]="{'border-danger': f.invalid && f.submitted}" 
                     class="form-control form-text"
                     [disabled]="isLoading"
                     placeholder="Enter retro point.">
@@ -45,7 +45,7 @@
     </div>
     <div class="row" *ngFor="let point of getPointsList()">
         <div class="col">
-            <p class="word-wrap local">{{point.pointText}} - {{point.participantName}}</p>
+            <p class="text-break text-primary">{{point.pointText}} - {{point.participantName}}</p>
         </div>
     </div>
 </div>

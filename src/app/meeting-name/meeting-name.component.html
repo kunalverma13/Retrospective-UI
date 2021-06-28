@@ -17,7 +17,7 @@
                     name="meetingName" 
                     id="meetingName" 
                     required 
-                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    [ngClass]="{'border-danger': f.invalid && f.submitted}" 
                     class="form-control form-text"
                     [disabled]="isLoading"
                     placeholder="Enter meeting name.">

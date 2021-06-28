@@ -16,7 +16,7 @@
                     name="participantName" 
                     id="participantName" 
                     required 
-                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    [ngClass]="{'border-danger': f.controls.participantName && f.controls.participantName.invalid && f.submitted}" 
                     class="form-control form-text"
                     [disabled]="isLoading"
                     placeholder="Enter participant name.">
@@ -39,7 +39,7 @@
                     id="participantEmail" 
                     required 
                     email
-                    [ngClass]="{redBorder: f.invalid && f.submitted}" 
+                    [ngClass]="{'border-danger': f.controls.participantEmail && f.controls.participantEmail.invalid && f.submitted}" 
                     class="form-control form-text"
                     [disabled]="isLoading"
                     placeholder="Enter participant email.">
