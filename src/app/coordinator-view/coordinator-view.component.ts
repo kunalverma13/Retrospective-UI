@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { Meeting } from '../Models/meeting.model';
 import { MeetingService } from '../Services/meeting.service';
@@ -17,7 +18,7 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
   meetingId: string = "";
   routeSubscription: Subscription = new Subscription();
 
-  constructor(private meetingService: MeetingService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private spinnerService: NgxSpinnerService, private meetingService: MeetingService, private route: ActivatedRoute) { }
   
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
@@ -33,6 +34,7 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
 
   getMeetingData(): void {
     this.isLoading = true;
+    this.spinnerService.show();
     this.meetingService.getMeetingData(this.meetingService.meetingId)
     .subscribe(response=>{
       this.meetingData = response;
@@ -44,6 +46,7 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
     }, 
     ()=>{
       this.isLoading = false;
+      this.spinnerService.hide();
     });
   }
 
