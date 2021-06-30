@@ -17,13 +17,44 @@
                     name="meetingName" 
                     id="meetingName" 
                     required 
-                    [ngClass]="{'border-danger': f.invalid && f.submitted}" 
+                    [ngClass]="{'border-danger': f.controls.meetingName && f.controls.meetingName.invalid && (f.controls.meetingName.dirty || f.controls.meetingName.touched)}" 
                     class="form-control form-text"
                     [disabled]="isLoading"
                     placeholder="Enter meeting name.">
             </div>
             <div class="col text-left">
-                <p class="form-text text-danger" *ngIf="f.invalid && f.submitted">Please enter a meeting name.</p>
+                <p class="form-text text-danger" *ngIf="f.controls.meetingName && f.controls.meetingName.invalid && (f.controls.meetingName.dirty || f.controls.meetingName.touched)">Please enter a meeting name.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 col-form-label">
+                <label for="listName">Add lists:</label>
+            </div>
+            <div class="col">
+                <div class="row" *ngFor="let listName of listNames; let i = index">
+                    <div class="col">
+                        <input #ln
+                            type="text" 
+                            ngModel="{{listName}}"
+                            name="listName{{i}}" 
+                            id="listName{{i}}" 
+                            required 
+                            [ngClass]="{'border-danger': shouldShowError(ln) && f.submitted}" 
+                            class="form-control form-text"
+                            [disabled]="isLoading"
+                            placeholder="Enter list name.">
+                    </div>
+                    <div class="col">
+                        <p class="form-text text-danger" *ngIf="shouldShowError(ln) && f.submitted">
+                            Please enter a list name.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a class="anchor" (click)="addList()">Add new list</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">

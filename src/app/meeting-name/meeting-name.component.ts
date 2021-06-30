@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
-import { Meeting } from '../Models/meeting.model';
+import { Meeting, Points } from '../Models/meeting.model';
 import { MeetingService } from '../Services/meeting.service';
 
 @Component({
@@ -17,9 +17,12 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   isSaved: boolean = false;
   isError: boolean = false;
   meetingId: string = "";
+  listNames: string[] = ["Start doing", "Continue doing", "Stop doing"];
   saveMeetingNameSubscription: Subscription = new Subscription();
 
-  constructor(private meetingService: MeetingService, private route: ActivatedRoute, private spinnerService: NgxSpinnerService) { }
+  constructor(private meetingService: MeetingService, 
+    private route: ActivatedRoute, 
+    private spinnerService: NgxSpinnerService) { }
   
   ngOnDestroy(): void {
     this.saveMeetingNameSubscription.unsubscribe();
@@ -28,11 +31,17 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  onSubmit(form: NgForm){
-    if(form.valid){
+  onSubmit(form: NgForm) {
+    if(form.valid) {
       this.spinnerService.show();
       this.isLoading = true;
-      this.saveMeetingNameSubscription = this.meetingService.saveMeetingName(new Meeting("", form.value.meetingName, []))
+      let pointsLists: Points[] = [];
+      this.listNames.forEach((element, i) => {
+        if(form.value['listName' + i].trim() !== "") {
+          pointsLists.push(new Points(i + 1, form.value['listName' + i], []));
+        }
+      });
+      this.saveMeetingNameSubscription = this.meetingService.saveMeetingName(new Meeting("", form.value.meetingName, [], pointsLists))
       .subscribe(
         (response: string) => {
           if(response === ""){
@@ -50,7 +59,28 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         }
       );
+    } else {
+      this.markFormGroupTouched(form);
     }
+  }
+
+  addList() {
+    this.listNames.push("");
+  }
+
+  shouldShowError(ln: HTMLInputElement) {
+    return ln && 
+    !ln.validity.valid;
+  }
+
+  private markFormGroupTouched(formGroup: NgForm) {
+    (<any>Object).values(formGroup.controls).forEach((control: any) => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 
 }

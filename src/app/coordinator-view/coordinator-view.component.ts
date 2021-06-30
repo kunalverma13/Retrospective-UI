@@ -43,6 +43,7 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
     error=>{
       this.isError = true;
       this.isLoading = false;
+      this.spinnerService.hide();
     }, 
     ()=>{
       this.isLoading = false;

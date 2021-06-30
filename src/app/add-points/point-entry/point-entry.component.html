@@ -12,7 +12,7 @@
                     name="txtPoint" 
                     id="txtPoint" 
                     required 
-                    [ngClass]="{'border-danger': f.invalid && f.submitted}" 
+                    [ngClass]="{'border-danger': f.controls.txtPoint && f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)}" 
                     class="form-control form-text"
                     [disabled]="isLoading"
                     placeholder="Enter retro point.">

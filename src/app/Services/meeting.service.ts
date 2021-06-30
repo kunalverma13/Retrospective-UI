@@ -22,7 +22,7 @@ export class MeetingService {
   constructor(private http: HttpClient, private httpErrorHandler: httpErrorHandlerService) { }
 
   saveMeetingName(meeting: Meeting): Observable<string> {
-    return this.http.post(`${this.apiURL}api/Meeting/SaveMeeting`, {meetingName: meeting.meetingName}).pipe(
+    return this.http.post(`${this.apiURL}api/Meeting/SaveMeeting`, {meetingName: meeting.meetingName, pointsLists: meeting.pointsLists}).pipe(
       catchError(this.httpErrorHandler.handleError),
       map((resposne)=>{
         return String(resposne);

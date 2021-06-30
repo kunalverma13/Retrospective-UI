@@ -25,7 +25,14 @@ export class AddPointsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.pointLists = this.meetingService.pointListsNames;
+    this.meetingService.getMeetingData(this.meetingService.meetingId).subscribe(
+      response => {
+        this.pointLists = response.pointsLists?.map(p => p.listName) ?? this.meetingService.pointListsNames;  
+      },
+      error => {
+        this.pointLists = this.meetingService.pointListsNames;
+      }
+    )
   }
 
   submitPoints(): void {
