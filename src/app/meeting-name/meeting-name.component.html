@@ -33,16 +33,25 @@
             <div class="col">
                 <div class="row" *ngFor="let listName of listNames; let i = index">
                     <div class="col">
-                        <input #ln
-                            type="text" 
-                            ngModel="{{listName}}"
-                            name="listName{{i}}" 
-                            id="listName{{i}}" 
-                            required 
-                            [ngClass]="{'border-danger': shouldShowError(ln) && f.submitted}" 
-                            class="form-control form-text"
-                            [disabled]="isLoading"
-                            placeholder="Enter list name.">
+                        <div class="row">
+                            <div class="col-10">
+                                <input #ln
+                                type="text" 
+                                ngModel="{{listName}}"
+                                name="listName{{i}}" 
+                                id="listName{{i}}" 
+                                required 
+                                [ngClass]="{'border-danger': shouldShowError(ln) && f.submitted}" 
+                                class="form-control form-text"
+                                [disabled]="isLoading"
+                                placeholder="Enter list name.">
+                            </div>
+                            <div class="col">
+                                <button class="btn-danger" mat-icon-button (click)="deleteList(i)">
+                                    <mat-icon>clear</mat-icon>
+                                  </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col">
                         <p class="form-text text-danger" *ngIf="shouldShowError(ln) && f.submitted">

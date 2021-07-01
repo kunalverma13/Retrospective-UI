@@ -5,6 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { Meeting, Points } from '../Models/meeting.model';
 import { MeetingService } from '../Services/meeting.service';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-meeting-name',
@@ -32,40 +34,51 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    if(form.valid) {
-      this.spinnerService.show();
-      this.isLoading = true;
-      let pointsLists: Points[] = [];
-      this.listNames.forEach((element, i) => {
-        if(form.value['listName' + i].trim() !== "") {
-          pointsLists.push(new Points(i + 1, form.value['listName' + i], []));
-        }
-      });
-      this.saveMeetingNameSubscription = this.meetingService.saveMeetingName(new Meeting("", form.value.meetingName, [], pointsLists))
-      .subscribe(
-        (response: string) => {
-          if(response === ""){
-            this.isError = true
-          } else {
-            this.meetingId = response;
-            this.isSaved = true;
+    try {
+      if(form.valid) {
+        this.spinnerService.show();
+        this.isLoading = true;
+        let pointsLists: Points[] = [];
+        
+        Object.keys(form.controls).forEach((key, i) => {
+          if(key.indexOf('listName') !== -1) {
+            pointsLists.push(new Points(i, form.value[key], []));
           }
-        }, 
-        error => {
-          this.isError = true;
-        },
-        () => {
-          this.spinnerService.hide();
-          this.isLoading = false;
-        }
-      );
-    } else {
-      this.markFormGroupTouched(form);
+        });
+  
+        this.saveMeetingNameSubscription = this.meetingService.saveMeetingName(new Meeting("", form.value.meetingName, [], pointsLists))
+        .subscribe(
+          (response: string) => {
+            if(response === ""){
+              this.isError = true
+            } else {
+              this.meetingId = response;
+              this.isSaved = true;
+            }
+          }, 
+          error => {
+            this.isError = true;
+          },
+          () => {
+            this.spinnerService.hide();
+            this.isLoading = false;
+          }
+        );
+      } else {
+        this.markFormGroupTouched(form);
+      } 
+    } catch (error) {
+      this.isError = true;
+      this.spinnerService.hide();
     }
   }
 
   addList() {
     this.listNames.push("");
+  }
+
+  deleteList(index: number) {
+    this.listNames.splice(index, 1);
   }
 
   shouldShowError(ln: HTMLInputElement) {
