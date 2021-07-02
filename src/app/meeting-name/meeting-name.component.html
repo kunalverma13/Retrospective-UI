@@ -30,6 +30,18 @@
             <div class="col-2 col-form-label">
                 <label for="listName">Add lists:</label>
             </div>
+            <div class="col col-form-label">
+                Try: 
+                <a role="button" class="anchor pointer-event" (click)="setListNames(['Start', 'Stop', 'Continue'])">Start Stop Continue</a> | 
+                <a role="button" class="anchor pointer-event" (click)="setListNames(['Mad', 'Sad', 'Glad'])">Mad Sad Glad</a> | 
+                <a role="button" class="anchor pointer-event" (click)="setListNames(['Liked', 'Learned', 'Lacked', 'Longed for'])">4 Ls</a> | 
+                <a role="button" class="anchor pointer-event" (click)="setListNames(['Keep doing', 'Do less of', 'Do more of', 'Stop doing', 'Start doing'])">Starfish</a> | 
+                <a role="button" class="anchor pointer-event" (click)="setListNames(['Wind', 'Anchor', 'Sun', 'Reef'])">Sailboat</a> | 
+                <a role="button" class="anchor pointer-event" (click)="setListNames(['Keep', 'Add', 'Less', 'More'])">KALM</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
             <div class="col">
                 <div class="row" *ngFor="let listName of listNames; let i = index">
                     <div class="col">
@@ -61,7 +73,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a class="anchor" (click)="addList()">Add new list</a>
+                        <a role="button" *ngIf="listNames.length != 10" class="anchor" (click)="addList()">Add new list</a>
                     </div>
                 </div>
             </div>

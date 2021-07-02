@@ -19,7 +19,7 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   isSaved: boolean = false;
   isError: boolean = false;
   meetingId: string = "";
-  listNames: string[] = ["Start doing", "Continue doing", "Stop doing"];
+  listNames: string[] = ["Start", "Stop", "Continue"];
   saveMeetingNameSubscription: Subscription = new Subscription();
 
   constructor(private meetingService: MeetingService, 
@@ -74,7 +74,9 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   }
 
   addList() {
-    this.listNames.push("");
+    if(this.listNames.length < 10) {
+      this.listNames.push("");
+    }
   }
 
   deleteList(index: number) {
@@ -84,6 +86,10 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   shouldShowError(ln: HTMLInputElement) {
     return ln && 
     !ln.validity.valid;
+  }
+
+  setListNames(names: string[]) {
+    this.listNames = names;
   }
 
   private markFormGroupTouched(formGroup: NgForm) {
