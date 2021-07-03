@@ -3,9 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatListModule } from '@angular/material/list'; 
+import { MatSidenavModule } from '@angular/material/sidenav'; 
+import { MatButtonModule } from '@angular/material/button'; 
 
 import { AppComponent } from './app.component';
 import { MeetingNameComponent } from './meeting-name/meeting-name.component';
@@ -21,9 +27,9 @@ import { ActionItemComponent } from './action-item/action-item.component';
 import { TimerComponent } from './timer/timer.component';
 import { FormatTimePipe } from './timer/format-time.pipe';
 import { MeetingSearchComponent } from './meeting-search/meeting-search.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MeetingDetailsComponent } from './meeting-search/meeting-details/meeting-details.component';
 import { SearchComponent } from './meeting-search/search/search.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +47,8 @@ import { SearchComponent } from './meeting-search/search/search.component';
     FormatTimePipe,
     MeetingSearchComponent,
     MeetingDetailsComponent,
-    SearchComponent
+    SearchComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +57,14 @@ import { SearchComponent } from './meeting-search/search/search.component';
     AppRoutingModule,
     NgbModule,
     NgxSpinnerModule,
+    Ng2SearchPipeModule,
     BrowserAnimationsModule,
     MatIconModule,
-    Ng2SearchPipeModule
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

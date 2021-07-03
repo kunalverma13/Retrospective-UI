@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { MeetingService } from 'src/app/Services/meeting.service';
 
@@ -18,17 +19,23 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   @Output('meetingSelected') meetingSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private meetingService: MeetingService) { }
+  constructor(private spinnerService: NgxSpinnerService, private meetingService: MeetingService) { }
   
   ngOnDestroy(): void {
     this.getMeetingsSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.getMeetingsSubscription = this.meetingService.getMeetings().subscribe(response => {
-      this.meetings = response;
-      this.filterData = this.meetings.slice();
-    })
+    this.spinnerService.show();
+    this.getMeetingsSubscription = this.meetingService.getMeetings().subscribe(
+      response => {
+        this.meetings = response;
+        this.filterData = this.meetings.slice();
+        this.spinnerService.hide();
+      }, error => {
+        this.spinnerService.hide();
+      }
+    )
   }
 
   dateSelected(): void {

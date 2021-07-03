@@ -1,10 +1,4 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <p class="h4 text-center">Welcome to your meeting!</p>
-            <hr/>
-        </div>
-    </div>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!isSaved && !isError">
         <div class="row">
             <div class="col-2 col-form-label">
@@ -46,7 +40,7 @@
                 <div class="row" *ngFor="let listName of listNames; let i = index">
                     <div class="col">
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-lg-10 col-md-9 col-sm-9">
                                 <input #ln
                                 type="text" 
                                 ngModel="{{listName}}"
@@ -58,10 +52,8 @@
                                 [disabled]="isLoading"
                                 placeholder="Enter list name.">
                             </div>
-                            <div class="col">
-                                <button class="btn-danger" mat-icon-button (click)="deleteList(i)">
-                                    <mat-icon>clear</mat-icon>
-                                  </button>
+                            <div class="col col-form-label">
+                                <mat-icon role="button" class="btn-danger" (click)="deleteList(i)">clear</mat-icon>
                             </div>
                         </div>
                     </div>
