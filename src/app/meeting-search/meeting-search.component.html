@@ -1,0 +1,2 @@
+<app-search *ngIf="selectedMeetingId === ''" (meetingSelected)="meetingSelected($event)"></app-search>
+<app-meeting-details *ngIf="selectedMeetingId !== ''" [meetingId]="selectedMeetingId" (hideMeetingDetails)="hideMeetingDetailsClicked()"></app-meeting-details>

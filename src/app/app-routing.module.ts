@@ -6,6 +6,7 @@ import { ParticipantNameComponent } from './participant-name/participant-name.co
 import { AddPointsComponent } from './add-points/add-points.component';
 import { CoordinatorViewComponent } from './coordinator-view/coordinator-view.component';
 import { NgbdModalComponent } from './ngbd-modal-component/ngbd-modal.component';
+import { MeetingSearchComponent } from './meeting-search/meeting-search.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "meetingName", pathMatch: "full"},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: "coordinator/:id", component: CoordinatorViewComponent},
   {path: "addPoints", component: AddPointsComponent},
   {path: "modal", component: NgbdModalComponent},
+  {path: "meetingSearch", component: MeetingSearchComponent},
 ]
 
 @NgModule({

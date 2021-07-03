@@ -1,0 +1,48 @@
+<div *ngIf="meetingData">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a role="button" (click)="backClicked()" class="anchor">Back</a>
+            </div>
+            <div class="col text-center">
+                <label class="h4">Welcome to {{meetingData.meetingName}}!</label>
+                <hr/>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container" *ngIf="!isLoading && !isError && isDataLoaded">
+        <div class="row">
+            <div class="col">
+                <app-participant-list [participantList]="meetingData.participants"></app-participant-list>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="h6 text-center">Retro points</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="text-truncate float-left w-30" *ngFor="let pointsList of meetingData.pointsLists">
+                    <app-point-list [pointsList]="pointsList" [readOnly]="true"></app-point-list>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-success" (click)="sendEmail()">Send email</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="!meetingData && !isLoading">
+    <div class="row">
+        <div class="col">
+            <p class="text-danger">There was an error in getting meeting data.</p>
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+    <p style="color: white">Please Wait. </p>  
+</ngx-spinner>

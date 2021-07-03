@@ -20,6 +20,10 @@ import { NgbdModalComponent } from './ngbd-modal-component/ngbd-modal.component'
 import { ActionItemComponent } from './action-item/action-item.component';
 import { TimerComponent } from './timer/timer.component';
 import { FormatTimePipe } from './timer/format-time.pipe';
+import { MeetingSearchComponent } from './meeting-search/meeting-search.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MeetingDetailsComponent } from './meeting-search/meeting-details/meeting-details.component';
+import { SearchComponent } from './meeting-search/search/search.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { FormatTimePipe } from './timer/format-time.pipe';
     NgbdModalComponent,
     ActionItemComponent,
     TimerComponent,
-    FormatTimePipe
+    FormatTimePipe,
+    MeetingSearchComponent,
+    MeetingDetailsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,8 @@ import { FormatTimePipe } from './timer/format-time.pipe';
     NgbModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

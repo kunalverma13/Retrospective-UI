@@ -8,6 +8,7 @@ import { Points } from '../Models/meeting.model';
 })
 export class PointListComponent implements OnInit {
   @Input("pointsList") pointsList!: Points;
+  @Input("readOnly") readOnly: boolean = false;
 
   constructor() { }
 

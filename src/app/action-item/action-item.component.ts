@@ -10,6 +10,7 @@ import { MeetingService } from '../Services/meeting.service';
 })
 export class ActionItemComponent implements OnInit, OnDestroy {
   
+  @Input('readOnly') readOnly: boolean = false;
   @Input('point') point!: Point;
   @Input('listId') listId: number = 0;
   @Output('close') close: EventEmitter<void> = new EventEmitter(); 

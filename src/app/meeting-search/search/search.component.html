@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col">
+                    <p class="h4 text-center">Search Results</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-active">
+                        <thead>
+                            <tr>
+                                <th scope="col">Meeting name</th>
+                                <th scope="col">Meeting date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of filterData | filter:term">
+                                <td><a role="button" class="anchor" (click)="meetingNameClicked(item.meetingId)">{{item.meetingName}}</a></td>
+                                <td>{{item.meetingDate | date}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <p class="h4 text-center">Search Criteria</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Search here" [(ngModel)]="term">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-form-label">
+                    <label for="startDate">Start date:</label>
+                </div>
+                <div class="col">
+                    <input class="form-control" id="startDate" name="startDate" type="date" [(ngModel)]="startDate" (change)="dateSelected()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-form-label">
+                    <label for="endDate">End date:</label>
+                </div>
+                <div class="col">
+                    <input class="form-control" id="endDate" name="endDate" type="date" [(ngModel)]="endDate" (change)="dateSelected()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

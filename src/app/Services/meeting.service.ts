@@ -78,6 +78,15 @@ export class MeetingService {
     );
   }
 
+  getMeetings(): Observable<{meetingId: string, meetingName: string, meetingDate: Date}[]> {
+    return this.http.get(`${this.apiURL}api/Meeting/GetMeetings`).pipe(
+      catchError(this.httpErrorHandler.handleError),
+      map((resposne: any)=>{
+        return resposne;
+      })
+    );
+  }
+
   saveActionItem(listId: number, pointId: number, actionItem: string): Observable<string> {
     return this.http.post(`${this.apiURL}api/Meeting/SaveActionItem`, {meetingId: this.meetingId, listId: listId, pointId: pointId, actionItem: actionItem}).pipe(
       catchError(this.httpErrorHandler.handleError),
