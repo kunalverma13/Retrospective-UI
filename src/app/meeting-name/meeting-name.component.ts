@@ -5,7 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { Meeting, Points } from '../Models/meeting.model';
 import { MeetingService } from '../Services/meeting.service';
-import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
@@ -20,6 +19,7 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   isError: boolean = false;
   meetingId: string = "";
   listNames: string[] = ["Start", "Stop", "Continue"];
+  canEditListNames: boolean = false;
   saveMeetingNameSubscription: Subscription = new Subscription();
 
   constructor(private meetingService: MeetingService, 
@@ -89,7 +89,12 @@ export class MeetingNameComponent implements OnInit, OnDestroy {
   }
 
   setListNames(names: string[]) {
-    this.listNames = names;
+    if(names.length === 0) {
+      this.canEditListNames = true;
+    } else {
+      this.canEditListNames = false;
+      this.listNames = names;
+    }
   }
 
   private markFormGroupTouched(formGroup: NgForm) {

@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list'; 
 import { MatSidenavModule } from '@angular/material/sidenav'; 
 import { MatButtonModule } from '@angular/material/button'; 
+import { MatRadioModule } from '@angular/material/radio'; 
 
 import { AppComponent } from './app.component';
 import { MeetingNameComponent } from './meeting-name/meeting-name.component';
@@ -64,7 +65,8 @@ import { MenuComponent } from './menu/menu.component';
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
