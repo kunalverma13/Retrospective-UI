@@ -1,6 +1,6 @@
 <div class="row" *ngIf="hasTimerEnded">
-    <div class="col"><label>Minutes:&nbsp;</label> <input [(ngModel)]="minutes" type="number" max="10" min="0"></div>
-    <div class="col"><label>Seconds:&nbsp;</label> <input [(ngModel)]="seconds" type="number" max="60" min="0"></div>
+    <div class="col"><label class="mr-1">Minutes:</label> <input [(ngModel)]="minutes" type="number" max="10" min="0"></div>
+    <div class="col"><label class="mr-1">Seconds:</label> <input [(ngModel)]="seconds" type="number" max="60" min="0"></div>
     <div class="col"><button class="btn btn-primary" (click)="start()">Start</button></div>
 </div>
 <div class="row" *ngIf="!hasTimerEnded">
