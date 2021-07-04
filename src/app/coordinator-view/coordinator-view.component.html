@@ -33,9 +33,19 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col">
                 <button class="btn btn-success" (click)="sendEmail()">Send email</button>
+            </div>
+        </div> -->
+        <div class="row mt-5">
+            <div class="col">
+                <form (ngSubmit)="sendEmail(f)" #f="ngForm">
+                    <input type="submit" value="Send email" class="btn btn-success mr-4">
+                    <mat-checkbox color="primary" class="mr-4" id="checkAllParticipants" name="checkAllParticipants" ngModel>All participants</mat-checkbox>
+                    <input class="mr-4 mt-1" id="txtAdditionalRecepients{{i}}" name="txtAdditionalRecepients{{i}}" ngModel *ngFor="let recepient of additionalRecepients, let i = index" type="email" email placeholder="Enater email address." #pe [ngClass]="{'border-danger': shouldShowError(pe)}">
+                    <a role="button" class="anchor" (click)="additionalRecepients.push('')">Add recepient</a>
+                </form>
             </div>
         </div>
     </div>
@@ -47,6 +57,6 @@
         </div>
     </div>
 </div>
-<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
-    <p style="color: white">Please Wait. </p>  
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait. </p>
 </ngx-spinner>

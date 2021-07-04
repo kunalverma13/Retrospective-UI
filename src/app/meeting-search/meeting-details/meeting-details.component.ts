@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
@@ -16,6 +17,8 @@ export class MeetingDetailsComponent implements OnInit , OnDestroy {
   isLoading: boolean = false;
   isDataLoaded: boolean = false;
   isError: boolean = false;
+  additionalRecepients: string[] = [];
+
   routeSubscription: Subscription = new Subscription();
   
   @Input('meetingId') meetingId: string = "";
@@ -54,21 +57,28 @@ export class MeetingDetailsComponent implements OnInit , OnDestroy {
     });
   }
 
-  sendEmail(): void {
-    this.meetingService.sendEmail(this.meetingService.meetingId).subscribe();
-  }
-
-  toggleAllowAddPoints(shouldGetData: boolean): void {
-    this.meetingService.toggleAllowAddPoints(this.meetingService.meetingId)
-    .subscribe(response=> {
-      if(shouldGetData) {
-        this.getMeetingData()
+  sendEmail(form: NgForm): void {
+    if(form.valid) {
+      var recepientList: string[] = [];
+      if(form.value.checkAllParticipants) {
+        recepientList = this.meetingData.participants.map(p => p.participantEmail);
       }
-    });
+      this.additionalRecepients.forEach((recepient, i) => {
+        if(form.value['txtAdditionalRecepients' + i] !== "") {
+          recepientList.push(form.value['txtAdditionalRecepients' + i]);
+        }
+      });
+      this.meetingService.sendEmail(this.meetingId, recepientList).subscribe();
+    }
   }
 
   backClicked(): void {
     this.hideMeetingDetails.emit();
+  }
+
+  shouldShowError(pe: HTMLInputElement) {
+    return pe && 
+    !pe.validity.valid;
   }
 
 }

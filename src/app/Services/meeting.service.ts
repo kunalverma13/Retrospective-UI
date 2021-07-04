@@ -97,8 +97,8 @@ export class MeetingService {
     );
   }
 
-  sendEmail(meetingId: string): Observable<boolean> {
-    return this.http.get(`${this.apiURL}api/Email?Id=${meetingId}`).pipe(
+  sendEmail(meetingId: string, recepients: string[]): Observable<boolean> {
+    return this.http.post(`${this.apiURL}api/Email`, {meetingId: meetingId, recepients: recepients}).pipe(
       catchError(this.httpErrorHandler.handleError),
       map((resposne: any)=>{
         return resposne;

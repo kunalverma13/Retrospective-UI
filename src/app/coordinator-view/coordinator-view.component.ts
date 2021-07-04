@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
@@ -16,6 +17,8 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
   isDataLoaded: boolean = false;
   isError: boolean = false;
   meetingId: string = "";
+  additionalRecepients: string[] = [];
+
   routeSubscription: Subscription = new Subscription();
 
   constructor(private spinnerService: NgxSpinnerService, private meetingService: MeetingService, private route: ActivatedRoute) { }
@@ -51,8 +54,23 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendEmail(): void {
-    this.meetingService.sendEmail(this.meetingService.meetingId).subscribe();
+  // sendEmail(): void {
+  //   this.meetingService.sendEmail(this.meetingService.meetingId).subscribe();
+  // }
+
+  sendEmail(form: NgForm): void {
+    if(form.valid) {
+      var recepientList: string[] = [];
+      if(form.value.checkAllParticipants) {
+        recepientList = this.meetingData.participants.map(p => p.participantEmail);
+      }
+      this.additionalRecepients.forEach((recepient, i) => {
+        if(form.value['txtAdditionalRecepients' + i] !== "") {
+          recepientList.push(form.value['txtAdditionalRecepients' + i]);
+        }
+      });
+      this.meetingService.sendEmail(this.meetingService.meetingId, recepientList).subscribe();
+    }
   }
 
   toggleAllowAddPoints(shouldGetData: boolean): void {
@@ -62,6 +80,11 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
         this.getMeetingData()
       }
     });
+  }
+
+  shouldShowError(pe: HTMLInputElement) {
+    return pe && 
+    !pe.validity.valid;
   }
 
 }

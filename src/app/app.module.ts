@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav'; 
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatRadioModule } from '@angular/material/radio'; 
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
 
 import { AppComponent } from './app.component';
 import { MeetingNameComponent } from './meeting-name/meeting-name.component';
@@ -66,7 +67,8 @@ import { MenuComponent } from './menu/menu.component';
     MatSidenavModule,
     MatButtonModule,
     FlexLayoutModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
