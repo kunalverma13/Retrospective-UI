@@ -54,10 +54,6 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  // sendEmail(): void {
-  //   this.meetingService.sendEmail(this.meetingService.meetingId).subscribe();
-  // }
-
   sendEmail(form: NgForm): void {
     if(form.valid) {
       var recepientList: string[] = [];
