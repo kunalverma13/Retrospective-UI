@@ -36,7 +36,7 @@
                 <form (ngSubmit)="sendEmail(f)" #f="ngForm">
                     <input type="submit" value="Send email" class="btn btn-success mr-4">
                     <mat-checkbox color="primary" class="mr-4" id="checkAllParticipants" name="checkAllParticipants" ngModel>All participants</mat-checkbox>
-                    <input class="mr-4 mt-1" id="txtAdditionalRecepients{{i}}" name="txtAdditionalRecepients{{i}}" ngModel *ngFor="let recepient of additionalRecepients, let i = index" type="email" email placeholder="Enater email address." #pe [ngClass]="{'border-danger': shouldShowError(pe)}">
+                    <input class="mr-4 mt-1" id="txtAdditionalRecepients{{i}}" name="txtAdditionalRecepients{{i}}" ngModel *ngFor="let recepient of additionalRecepients, let i = index" type="email" email placeholder="Enter email address." #pe [ngClass]="{'border-danger': shouldShowError(pe)}">
                     <a role="button" class="anchor" (click)="additionalRecepients.push('')">Add recepient</a>
                 </form>
             </div>
