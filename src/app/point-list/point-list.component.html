@@ -3,7 +3,7 @@
     <ul class="card-body list-unstyled">
         <li class="text-truncate" *ngFor="let point of pointsList.points">
             <app-ngbd-modal [linkText]="point.pointText + '-' + point.participantName">
-                <app-action-item [point]="point" [listId]="pointsList.id" [readOnly]="true"></app-action-item>
+                <app-action-item [point]="point" [listId]="pointsList.id" [readOnly]="readOnly"></app-action-item>
             </app-ngbd-modal>
             <span *ngIf="point.actionItem && point.actionItem !== ''" class="material-icons" style="color: #007bff;">done</span>
         </li>

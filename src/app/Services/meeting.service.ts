@@ -59,7 +59,7 @@ export class MeetingService {
 
   uploadPointsToDatabase(): Observable<any> {
     return this.http.post(
-      `${this.apiURL}api/Meeting/SavePointsLists`, 
+      `${this.apiURL}api/Meeting/SavePointsLists`,
       {"meetingId": this.meetingId, "listOfPointLists":  this.listOfpointLists})
       .pipe(
         catchError(this.httpErrorHandler.handleError),
@@ -106,8 +106,8 @@ export class MeetingService {
     );
   }
 
-  toggleAllowAddPoints(meetingId: string): Observable<string> {
-    return this.http.get(`${this.apiURL}api/Meeting/ToggleAddPointsFlag?Id=${meetingId}`).pipe(
+  toggleAllowAddPoints(meetingId: string, timerStarted: boolean): Observable<string> {
+    return this.http.post(`${this.apiURL}api/Meeting/ToggleAddPointsFlag`, {meetingId: meetingId, value: timerStarted}).pipe(
       catchError(this.httpErrorHandler.handleError),
       map((resposne: any)=>{
         return resposne;

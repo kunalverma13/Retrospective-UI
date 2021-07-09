@@ -11,7 +11,7 @@
                 <label>Start the timer to allow adding points:</label>
             </div>
             <div class="col">
-                <app-timer (countDownEnded)="toggleAllowAddPoints(true)" (countDownStarted)="toggleAllowAddPoints(false)"></app-timer>
+                <app-timer (countDownEnded)="toggleAllowAddPoints(false)" (countDownStarted)="toggleAllowAddPoints(true)"></app-timer>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col">
                 <div class="text-truncate d-inline-block align-top mt-4 w-30" *ngFor="let pointsList of meetingData.pointsLists">
-                    <app-point-list [pointsList]="pointsList"></app-point-list>
+                    <app-point-list [pointsList]="pointsList" [readOnly]="false"></app-point-list>
                 </div>
             </div>
         </div>

@@ -22,11 +22,11 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription = new Subscription();
 
   constructor(private spinnerService: NgxSpinnerService, private meetingService: MeetingService, private route: ActivatedRoute) { }
-  
+
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
   }
-  
+
   ngOnInit(): void {
     this.meetingService.meetingId = this.route.snapshot.params["id"];
     this.getMeetingData();
@@ -47,7 +47,7 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
       this.isError = true;
       this.isLoading = false;
       this.spinnerService.hide();
-    }, 
+    },
     ()=>{
       this.isLoading = false;
       this.spinnerService.hide();
@@ -69,17 +69,17 @@ export class CoordinatorViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleAllowAddPoints(shouldGetData: boolean): void {
-    this.meetingService.toggleAllowAddPoints(this.meetingService.meetingId)
+  toggleAllowAddPoints(timerStarted: boolean): void {
+    this.meetingService.toggleAllowAddPoints(this.meetingService.meetingId, timerStarted)
     .subscribe(response=> {
-      if(shouldGetData) {
+      if(!timerStarted) {
         this.getMeetingData()
       }
     });
   }
 
   shouldShowError(pe: HTMLInputElement) {
-    return pe && 
+    return pe &&
     !pe.validity.valid;
   }
 

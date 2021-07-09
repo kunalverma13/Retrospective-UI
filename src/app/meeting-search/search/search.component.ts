@@ -15,24 +15,27 @@ export class SearchComponent implements OnInit, OnDestroy {
   endDate!: Date;
   meetings: {meetingId: string, meetingName: string, meetingDate: Date}[] = [];
   filterData: {meetingId: string, meetingName: string, meetingDate: Date}[] = [];
+  shouldShowError: boolean = false;
   getMeetingsSubscription: Subscription = new Subscription();
 
   @Output('meetingSelected') meetingSelected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private spinnerService: NgxSpinnerService, private meetingService: MeetingService) { }
-  
+
   ngOnDestroy(): void {
     this.getMeetingsSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
     this.spinnerService.show();
+    this.shouldShowError = false;
     this.getMeetingsSubscription = this.meetingService.getMeetings().subscribe(
       response => {
         this.meetings = response;
         this.filterData = this.meetings.slice();
         this.spinnerService.hide();
       }, error => {
+        this.shouldShowError = true;
         this.spinnerService.hide();
       }
     )
