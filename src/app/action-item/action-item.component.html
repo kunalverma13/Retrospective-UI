@@ -18,7 +18,7 @@
                     <textarea [disabled]="readOnly" class="form-control" placeholder="Action item" name="txtActionItem" id="txtActionItem" #txtActionItem>{{point.actionItem}}</textarea>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!readOnly">
                 <div class="col">
                     <button class="btn btn-primary" (click)="saveActionItem()">Save</button>
                 </div>

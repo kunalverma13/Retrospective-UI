@@ -7,14 +7,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <textarea 
-                    ngModel 
-                    name="txtPoint" 
-                    id="txtPoint" 
-                    required 
-                    [ngClass]="{'border-danger': f.controls.txtPoint && f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)}" 
-                    class="form-control form-text"
-                    [disabled]="isLoading"
+                <textarea ngModel name="txtPoint" id="txtPoint" required [ngClass]="{'border-danger': f.controls.txtPoint && f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)}" class="form-control form-text" [disabled]="isLoading"
                     placeholder="Enter retro point.">
                 </textarea>
                 <p class="form-text text-danger" *ngIf="f.controls.txtPoint && f.controls.txtPoint.invalid && (f.controls.txtPoint.dirty || f.controls.txtPoint.touched)">Enter some text.</p>
@@ -22,13 +15,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <input 
-                    type="checkbox"
-                    ngModel 
-                    name="checkAnonymous" 
-                    id="checkAnonymous" 
-                    class="form-check-inline"
-                    [disabled]="isLoading">
+                <input type="checkbox" ngModel name="checkAnonymous" id="checkAnonymous" class="form-check-inline" [disabled]="isLoading">
                 <label class="form-check-label">Anonymous</label>
             </div>
         </div>
@@ -45,7 +32,8 @@
     </div>
     <div class="row" *ngFor="let point of getPointsList()">
         <div class="col">
-            <p class="text-break text-primary">{{point.pointText}} - {{point.participantName}}</p>
+            <p class="text-break text-primary d-inline-block">{{point.pointText}} - {{point.participantName}}</p>
+            <mat-icon role="button" class="text-danger btn pt-0 font-weight-bold" (click)="deletePoint(point)">clear</mat-icon>
         </div>
     </div>
 </div>

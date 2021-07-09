@@ -42,18 +42,26 @@ export class MeetingService {
   }
 
   addPointToPointsList(point: Point, listName: string) {
-    var listObject = this.listOfpointLists.find(x=>x.listName === listName);
+    var listObject = this.listOfpointLists.find(x => x.listName === listName);
     if(listObject === undefined) {
       this.listOfpointLists.push(
         {id: 0, listName: listName, points: [{id: 0, participantName: point.participantName, participantId: point.participantId, pointText: point.pointText, actionItem: ""}]})
     } else {
-      listObject.points.push({id: 0, participantName: point.participantName, participantId: point.participantId, pointText: point.pointText, actionItem: ""});
+      listObject.points.push({id: listObject.points.length + 1, participantName: point.participantName, participantId: point.participantId, pointText: point.pointText, actionItem: ""});
+    }
+  }
+
+  deletePointFromPointsList(point: Point, listName: string) {
+    var listObject = this.listOfpointLists.find(x => x.listName === listName);
+    var pointIndex = listObject?.points.findIndex(x => x.id === point.id)
+    if(pointIndex !== undefined) {
+      listObject?.points.splice(pointIndex, 1);
     }
   }
 
   getPointsList(listName: string): Point[] {
     var response: Point[] = [];
-    var listObject = this.listOfpointLists.find(x=>x.listName === listName);
+    var listObject = this.listOfpointLists.find(x => x.listName === listName);
     return listObject === undefined ? response : listObject.points;
   }
 

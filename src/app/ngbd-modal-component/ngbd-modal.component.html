@@ -1,5 +1,8 @@
-<a class="alert-link" (click)="open(modalData)">{{linkText}}</a>
+<a role="button" class="alert-link" (click)="open(modalData)">{{linkText}}</a>
 
 <ng-template #modalData>
+    <div class="text-right mr-1 mt-1">
+        <mat-icon role="button" class="btn-danger rounded" (click)="close()">clear</mat-icon>
+    </div>
     <ng-content></ng-content>
 </ng-template>

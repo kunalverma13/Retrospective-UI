@@ -1,10 +1,12 @@
 <div class="card">
     <p class="h6 card-header">{{pointsList.listName}}</p>
     <ul class="card-body list-unstyled">
-        <li class="text-truncate" *ngFor="let point of pointsList.points">
-            <app-ngbd-modal [linkText]="point.pointText + '-' + point.participantName">
-                <app-action-item [point]="point" [listId]="pointsList.id" [readOnly]="readOnly"></app-action-item>
-            </app-ngbd-modal>
+        <li *ngFor="let point of pointsList.points, let i = index">
+            <div class="text-truncate d-inline-block mw-98">
+                <app-ngbd-modal [linkText]="(i + 1) + '. ' + point.pointText + '-' + point.participantName">
+                    <app-action-item [point]="point" [listId]="pointsList.id" [readOnly]="readOnly"></app-action-item>
+                </app-ngbd-modal>
+            </div>
             <span *ngIf="point.actionItem && point.actionItem !== ''" class="material-icons" style="color: #007bff;">done</span>
         </li>
     </ul>

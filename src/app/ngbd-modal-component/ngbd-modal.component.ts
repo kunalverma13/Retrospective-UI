@@ -15,7 +15,7 @@ export class NgbdModalComponent implements OnInit, OnDestroy {
   actionItemSavedSubjectSubscription: Subscription = new Subscription();
 
   constructor(private modalService: NgbModal, private meetingService: MeetingService) { }
-  
+
   ngOnDestroy(): void {
     this.actionItemSavedSubjectSubscription.unsubscribe();
   }
@@ -31,7 +31,7 @@ export class NgbdModalComponent implements OnInit, OnDestroy {
   }
 
   close(): void {
-    this.modelRef.close();
+    this.modelRef?.close();
   }
 
 }

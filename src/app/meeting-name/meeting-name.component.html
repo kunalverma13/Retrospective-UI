@@ -38,7 +38,7 @@
                                 <input #ln type="text" ngModel="{{listName}}" name="listName{{i}}" id="listName{{i}}" required [readonly]="!canEditListNames" [ngClass]="{'border-danger': shouldShowError(ln) && f.submitted}" class="form-control form-text" [disabled]="isLoading" placeholder="Enter list name.">
                             </div>
                             <div *ngIf="canEditListNames" class="col col-form-label">
-                                <mat-icon role="button" class="btn-danger" (click)="deleteList(i)">clear</mat-icon>
+                                <mat-icon role="button" class="btn-danger rounded" (click)="deleteList(i)">clear</mat-icon>
                             </div>
                         </div>
                     </div>

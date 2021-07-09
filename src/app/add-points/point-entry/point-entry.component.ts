@@ -24,8 +24,8 @@ export class PointEntryComponent implements OnInit {
     if(form.valid) {
       var point: Point = {
         id: 0,
-        participantName: form.value.checkAnonymous ? "Anonymous" : this.meetingService.participantName, 
-        participantId: form.value.checkAnonymous ? 0 : this.meetingService.participantId, 
+        participantName: form.value.checkAnonymous ? "Anonymous" : this.meetingService.participantName,
+        participantId: form.value.checkAnonymous ? 0 : this.meetingService.participantId,
         pointText: form.value.txtPoint,
         actionItem: ""
       };
@@ -37,8 +37,12 @@ export class PointEntryComponent implements OnInit {
     }
   }
 
-  getPointsList() {
+  getPointsList(): Point[] {
     return this.meetingService.getPointsList(this.title);
+  }
+
+  deletePoint(point: Point) {
+    this.meetingService.deletePointFromPointsList(point, this.title);
   }
 
 }
