@@ -8,7 +8,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <table class="table table-active">
+                    <table class="table table-active rounded-top" style="border-collapse: separate;">
                         <thead>
                             <tr>
                                 <th scope="col">Meeting name</th>
@@ -36,7 +36,7 @@
                     <input type="text" class="form-control" placeholder="Search here" [(ngModel)]="term">
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col col-form-label">
                     <label for="startDate">Start date:</label>
                 </div>
@@ -44,7 +44,7 @@
                     <input class="form-control" id="startDate" name="startDate" type="date" [(ngModel)]="startDate" (change)="dateSelected()">
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col col-form-label">
                     <label for="endDate">End date:</label>
                 </div>
